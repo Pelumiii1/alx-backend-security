@@ -15,3 +15,10 @@ class BlockedIP(models.Model):
 
     def __str__(self):
         return self.ip_address
+
+class SuspiciousIP(models.Model):
+    ip_address = models.GenericIPAddressField(unique=True)
+    reason = models.TextField()
+
+    def __str__(self):
+        return self.ip_address
