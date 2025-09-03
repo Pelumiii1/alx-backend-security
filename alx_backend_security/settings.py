@@ -49,7 +49,15 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'ip_tracking.middleware.IPTrackingMiddleware',
+    'django_ip_geolocation.middleware.IpGeolocationMiddleware',
+    'ratelimit.middleware.RatelimitMiddleware',
 ]
+
+RATELIMIT_RATES = {
+    'user': '10/m',
+    'anon': '5/m',
+}
+
 
 ROOT_URLCONF = 'alx_backend_security.urls'
 
@@ -122,3 +130,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
